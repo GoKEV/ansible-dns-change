@@ -1,2 +1,4 @@
 ---
 # handlers file for kev-dns-change
+- name: reload nmcli
+  shell: nmcli connection up "{{ ansible_default_ipv4_connection }}"
