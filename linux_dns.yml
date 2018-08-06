@@ -1,0 +1,13 @@
+---
+- name: set dns entries for EL based linux distros
+  hosts: linux
+  become: true
+  tasks:
+  - name: set dns for EL 7 based servers on all nics
+    nmcli:
+      conn_name: "{{ ansible_default_ipv4.interface }}"
+      type: ethernet
+      dns4: "{{ item }}"
+      state: present
+    with_items: "{{ dns_servers }}"
+    
