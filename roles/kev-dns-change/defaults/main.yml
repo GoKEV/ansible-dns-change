@@ -1,2 +1,6 @@
 ---
-# defaults file for kev-dns-change
+resolv_nameservers: ''
+resolv_domain: ''
+resolv_search: ''
+resolv_sortlist: ''
+resolv_options: ''
