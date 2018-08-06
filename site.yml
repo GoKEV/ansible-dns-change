@@ -1,0 +1,30 @@
+---
+- name: MAIN | Deploying subtasks
+  hosts: all
+  remote_user: root
+  gather_facts: yes
+
+  tasks:
+  - name: Apply Windows DNS settings
+    include_role:
+      name: dns_windows
+    when: ansible_distribution_file_variety == "RedHat" and ansible_distribution_major_version == "6"
+
+  - name: Apply EL6 DNS settings
+    include_role:
+      name: dns_el6
+    when: ansible_distribution_file_variety == "RedHat" and ansible_distribution_major_version == "6"
+
+  - name: Apply EL7 DNS settings
+    include_role:
+      name: dns_el7
+    when: ansible_distribution_file_variety == "RedHat" and ansible_distribution_major_version == "7"
+
+
+#	"ansible_distribution": "CentOS", 
+#        "ansible_distribution_file_parsed": true, 
+#        "ansible_distribution_file_path": "/etc/redhat-release", 
+#        "ansible_distribution_file_variety": "RedHat", 
+#        "ansible_distribution_major_version": "7", 
+
+## Still need to work out the vars for Windows and if they can use the same module for 2016 and 
