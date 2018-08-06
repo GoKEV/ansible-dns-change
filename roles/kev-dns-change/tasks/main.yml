@@ -1,20 +1,10 @@
 ---
-# tasks file for kev-dns-change---
-
-#	"ansible_distribution": "CentOS", 
-#        "ansible_distribution_file_parsed": true, 
-#        "ansible_distribution_file_path": "/etc/redhat-release", 
-#        "ansible_distribution_file_variety": "RedHat", 
-#        "ansible_distribution_major_version": "7", 
-
-## Still need to work out the vars for Windows and if they can use the same module for 2016 and 
-10
-
-- name: Include task list in play
-  include: dns_centos.yml
-  when: ansible_distribution == "CentOS"
-
-- name: Include task list in play
+- name: Update DNS for RHEL 6 boxes
   include: dns_el6.yml
-  when: ansible_distribution == "RedHat"
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux' and ansible_distribution_major_version == '6'
+
+- name: Update DNS for RHEL 7 boxes
+  include: dns_el7.yml
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux' and ansible_distribution_major_version == '7'
+
 
