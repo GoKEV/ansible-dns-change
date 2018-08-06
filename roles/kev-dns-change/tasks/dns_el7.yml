@@ -6,5 +6,4 @@
     dns4: "{{ item }}"
     state: present
   with_items: "{{ dns_servers }}"
-  notify:
-    - nmcli reload
+  notify: reload nmcli
