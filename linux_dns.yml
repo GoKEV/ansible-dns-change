@@ -16,15 +16,20 @@
       - restart NetworkManager
       - wait for new network settings
       
-  - name: Set DNS entries for EL 6 based servers
-
-
   handlers:
   - name: reload network interface
     shell: nmcli con reload 
+
   - name: restart NetworkManager 
-    service: name=NetworkManager state=restarted 
+    service: 
+      name: NetworkManager 
+      state: restarted 
+
   - name: wait for new network settings
     sudo: false 
     local_action: 
-      module: wait_for host={{ ansible_ssh_host | default(inventory_hostname) }} port=22 delay=10 timeout=300
+      module: 
+        wait_for host: {{ ansible_ssh_host | default(inventory_hostname) }} 
+        port: 22
+        delay: 10 
+        timeout: 300
