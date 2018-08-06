@@ -1,0 +1,14 @@
+---
+- hosts: windows
+  become: true
+  become_method: run_as
+  vars:
+    dns_servers:
+      - 8.8.8.8
+      - 4.4.4.4
+  tasks:
+  - win_dns_client:
+      adapter_names: "*"
+      ipv4_addresses: "{{ item }}"
+      log_path: c:\dns_log.txt
+    with_items: "{{ dns_servers }}"
