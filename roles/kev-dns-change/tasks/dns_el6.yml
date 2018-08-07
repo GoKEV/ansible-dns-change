@@ -1,4 +1,4 @@
-- name: Configure resolv.conf
+- name: Configure resolv.conf on EL6
   template:
     src: resolv.conf.j2
     dest: /etc/resolv.conf
