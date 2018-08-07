@@ -1,12 +1,8 @@
 ---
-- name: install requirements
+- name: confirm NetworkManager installed
   yum:
     state: latest
-    name: {{ item }}
-  with_items
-  - nmcli
-  - dbus
-  - NetworkManager-glib
+    name: NetworkManager-glib
 
 
 - name: set dns for EL 7 based servers
