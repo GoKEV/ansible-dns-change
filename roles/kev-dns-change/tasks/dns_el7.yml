@@ -1,4 +1,14 @@
 ---
+- name: install requirements
+  yum:
+    state: latest
+    name: {{ item }}
+  with_items
+  - nmcli
+  - dbus
+  - NetworkManager-glib
+
+
 - name: set dns for EL 7 based servers
   nmcli:
     conn_name: "{{ ansible_default_ipv4.interface }}"
