@@ -7,7 +7,8 @@
       - 75.75.75.75
 
   tasks:
-  - win_dns_client:
+  - name: Apply DNS settings for Windows machines
+    win_dns_client:
       adapter_names: "*"
       ipv4_addresses: "{{ dns_servers }}"
       log_path: c:\dns_log.txt
