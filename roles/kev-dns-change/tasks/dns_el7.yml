@@ -4,6 +4,11 @@
     state: latest
     name: NetworkManager-glib
 
+- name: set resolv.conf
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+    mode: 0644
 
 - name: set dns for EL 7 based servers
   nmcli:
