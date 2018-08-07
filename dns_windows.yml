@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  become: true
-  become_method: run_as
   vars:
     dns_servers:
       - 8.8.8.8
