@@ -9,6 +9,5 @@
   tasks:
   - win_dns_client:
       adapter_names: "*"
-      ipv4_addresses: "{{ item }}"
+      ipv4_addresses: "{{ dns_servers }}"
       log_path: c:\dns_log.txt
-    with_items: "{{ dns_servers }}"
