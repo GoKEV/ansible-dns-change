@@ -14,6 +14,5 @@
   nmcli:
     conn_name: "{{ ansible_default_ipv4.interface }}"
     type: ethernet
-    dns4: "{{ item }}"
+    dns4: "{{ resolv_nameservers }}"
     state: present
-  with_items: "{{ resolv_nameservers }}"
