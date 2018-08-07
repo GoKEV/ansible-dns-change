@@ -5,9 +5,5 @@
     dest: /etc/resolv.conf
     mode: 0644
 
-- name: set dns for EL 7 based servers with NMCLI
-  nmcli:
-    conn_name: "{{ ansible_default_ipv4.interface }}"
-    type: ethernet
-    dns4: "{{ resolv_nameservers }}"
-    state: present
+- name: set dns for EL 7 based servers with NetworkManager
+  raw: service NetworkManager restart
