@@ -17,4 +17,3 @@
     dns4: "{{ item }}"
     state: present
   with_items: "{{ resolv_nameservers }}"
-  notify: reload nmcli
