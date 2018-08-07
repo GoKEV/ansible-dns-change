@@ -1,5 +1,8 @@
 ---
-resolv_nameservers: ''
+resolv_nameservers:
+  - 8.8.8.8
+  - 8.8.4.4
+  - 75.75.75.75
 resolv_domain: ''
 resolv_search: ''
 resolv_sortlist: ''
