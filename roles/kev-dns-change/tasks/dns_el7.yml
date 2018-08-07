@@ -5,5 +5,8 @@
     dest: /etc/resolv.conf
     mode: 0644
 
-- name: set dns for EL 7 based servers with NetworkManager
-  raw: service NetworkManager restart
+- name: restart NetworkManager with command
+  command: /bin/systemctl restart NetworkManager.service
+
+- name: restart NetworkManager with raw
+  raw: /bin/systemctl restart NetworkManager.service
