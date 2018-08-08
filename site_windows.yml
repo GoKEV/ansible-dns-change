@@ -1,6 +1,7 @@
 ---
 - name: Changing DNS with kev-dns-change role
-  hosts: all
+  hosts: win
+  remote_user: Administrator
   gather_facts: yes
 
 
