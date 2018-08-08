@@ -1,0 +1,6 @@
+---
+- name: Apply DNS settings for Windows machines with win_dns_client
+  win_dns_client:
+    adapter_names: "*"
+    ipv4_addresses: "{{ resolv_nameservers }}"
+    log_path: c:\dns_log.txt

@@ -1,0 +1,9 @@
+- name: Change nameserver settings in the interfaces file
+  interfaces_file:
+    dest: /etc/network/interfaces.d/eth1.cfg
+    iface: "{{ ansible_default_ipv4.interface }}"
+    option: dns-nameservers
+    value: "{{ resolv_nameservers[0]|default ('') }} {{ resolv_nameservers[2]|default ('') }} {{ resolv_nameservers[3]|default ('') }}"
+    backup: yes
+    state: present
+
