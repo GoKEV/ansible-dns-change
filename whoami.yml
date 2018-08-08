@@ -29,5 +29,5 @@
       - name: display the result of the root user command
         debug:
           var: rootcmd_result
-     become: true
+      become: true
 
