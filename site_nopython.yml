@@ -1,0 +1,27 @@
+---
+- name: Changing DNS with kev-dns-change role
+  hosts: all
+  remote_user: root
+  gather_facts: no
+
+  vars:
+  - resolv_file: /tmp/newfile.txt
+  - resolv_text: |
+      nameserver 8.8.8.8
+      nameserver 8.8.4.4
+      nameserver 75.75.75.75
+
+  tasks:
+  - name: "RHEL5 write to file {{ resolv_file }}"
+    raw: |
+      echo "{{ resolv_text }}" > "{{ resolv_file }}"
+
+  - name: RHEL5 read the file
+    raw: /bin/cat "{{ resolv_file }}"
+    register: cmd_output
+
+  - name: debug output of the file
+    debug:
+      msg: "{{ cmd_output }}"
+    delegate_to: localhost
+
