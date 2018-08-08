@@ -20,7 +20,7 @@
 
       - name: display the result of the whoami
         debug:
-        var: whoamis_result
+          var: whoamis_result
 
       - name: A command for only root users
         shell: cat /etc/shadow
