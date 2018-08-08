@@ -20,8 +20,7 @@ dns-win2016b ansible_host=10.0.20.236
 dns-win10 ansible_host=10.0.20.237
 
 [win:vars]
-ansible_connection: winrm
-ansible_winrm_transport: basic
-ansible_port: 5986
-ansible_winrm_server_cert_validation: ignore
-
+ansible_connection=winrm
+ansible_winrm_transport=basic
+ansible_port=5986
+ansible_winrm_server_cert_validation=ignore
