@@ -12,8 +12,8 @@
       debug:
         var: whoami_result
 
-   - name: Do this as sudo
-     block:
+    - name: Do this as sudo
+      block:
       - name: What user is running this
         shell: whoami
         register: whoamis_result
