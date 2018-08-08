@@ -3,7 +3,7 @@
     dest: /etc/network/interfaces
     iface: "{{ ansible_default_ipv4.interface }}"
     option: dns-nameservers
-    value: 1.1.1.1 2.2.2.2 3.3.3.3
+    value: "{{ resolv_nameservers[0]|default ('') }} {{ resolv_nameservers[2]|default ('') }} {{ resolv_nameservers[3]|default ('') }}"	
     backup: yes
     state: present
 
