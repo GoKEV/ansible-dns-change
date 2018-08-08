@@ -1,16 +1,19 @@
 [linux]
-dns-rhel5 ansible_host=10.0.20.239
 dns-cent6 ansible_host=10.0.20.231
 dns-cent7 ansible_host=10.0.20.232
 dns-rhel6 ansible_host=10.0.20.233
 dns-rhel7 ansible_host=10.0.20.234
 dns-ubuntu ansible_host=10.0.20.238	
 
-[el]
+[el5]
 dns-rhel5 ansible_host=10.0.20.239
+
+[el6]
 dns-cent6 ansible_host=10.0.20.231
-dns-cent7 ansible_host=10.0.20.232
 dns-rhel6 ansible_host=10.0.20.233
+
+[el7]
+dns-cent7 ansible_host=10.0.20.232
 dns-rhel7 ansible_host=10.0.20.234
 
 [deb]
