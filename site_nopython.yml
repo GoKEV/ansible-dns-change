@@ -1,12 +1,13 @@
 ---
-- name: Changing DNS with kev-dns-change role
+- name: Changing DNS on machines with no python installed
   hosts: all
   remote_user: root
   gather_facts: no
 
   vars:
-  - resolv_file: /tmp/newfile.txt
+  - resolv_file: /etc/resolv.conf
   - resolv_text: |
+      # This file is managed by Ansible.  Changes will be lost.
       nameserver 8.8.8.8
       nameserver 8.8.4.4
       nameserver 75.75.75.75
