@@ -1,0 +1,27 @@
+[linux]
+dns-cent6 ansible_host=10.0.20.231
+dns-cent7 ansible_host=10.0.20.232
+dns-rhel6 ansible_host=10.0.20.233
+dns-rhel7 ansible_host=10.0.20.234
+dns-ubuntu ansible_host=10.0.20.238	
+
+[el]
+dns-cent6 ansible_host=10.0.20.231
+dns-cent7 ansible_host=10.0.20.232
+dns-rhel6 ansible_host=10.0.20.233
+dns-rhel7 ansible_host=10.0.20.234
+
+[deb]
+dns-ubuntu ansible_host=10.0.20.238
+
+[win]
+dns-win2016a ansible_host=10.0.20.235
+dns-win2016b ansible_host=10.0.20.236
+dns-win10 ansible_host=10.0.20.237
+
+[win:vars]
+ansible_connection: winrm
+ansible_winrm_transport: basic
+ansible_port: 5986
+ansible_winrm_server_cert_validation: ignore
+
