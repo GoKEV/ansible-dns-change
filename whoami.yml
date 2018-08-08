@@ -9,7 +9,7 @@
       register: whoami_result
 
     - name: display the result of the whoami
-    - debug:
+      debug:
         var: whoami_result
         verbosity: 2
 
