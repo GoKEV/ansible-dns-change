@@ -13,4 +13,13 @@
         var: whoami_result
         verbosity: 2
 
-    - name: Perform an action that a normal user cannot do
+
+    - name: A command for only root users
+      shell: cat /etc/shadow
+      register: rootcmd_result
+
+    - name: display the result of the root user command
+      debug:
+        var: wrootcmd_result
+        verbosity: 2
+
