@@ -12,7 +12,8 @@
       debug:
         var: whoami_result
 
-
+  block:
+    become: yes
     - name: A command for only root users
       shell: cat /etc/shadow
       register: rootcmd_result
