@@ -1,0 +1,16 @@
+---
+- name: Testing out some user limitations
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: What user is running this
+      shell: whoami
+      register: whoami_result
+
+    - name: display the result of the whoami
+    - debug:
+        var: whoami_result
+        verbosity: 2
+
+    - name: Perform an action that a normal user cannot do
