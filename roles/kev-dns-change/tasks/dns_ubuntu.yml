@@ -1,6 +1,6 @@
 - name: Change nameserver settings in the interfaces file
   interfaces_file:
-    dest: /etc/network/interfaces.d/eth1.cfg
+    dest: /etc/network/interfaces
     iface: "{{ ansible_default_ipv4.interface }}"
     option: dns-nameservers
     value: 1.1.1.1 2.2.2.2 3.3.3.3
