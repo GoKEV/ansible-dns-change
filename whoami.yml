@@ -19,5 +19,5 @@
 
     - name: display the result of the root user command
       debug:
-        var: wrootcmd_result
+        var: rootcmd_result
 
