@@ -1,10 +1,4 @@
 ---
-- name: set resolv.conf on EL7
-  template:
-    src: resolv.conf.j2
-    dest: /etc/resolv.conf
-    mode: 0644
-
 - name: set dns for EL 7 based servers with NMCLI
   nmcli:
     conn_name: "{{ ansible_default_ipv4.interface }}"
@@ -12,6 +6,26 @@
     dns4: "{{ resolv_nameservers }}"	
     state: present	
 
-- name: restart NetworkManager with command
+- name: activate changes with nmcli
   command: /usr/bin/nmcli connection up "{{ ansible_default_ipv4.interface }}"
+  tags: restart
+
+- name: debugging to check interface status
+  command: /usr/bin/nmcli dev show "{{ ansible_default_ipv4.interface }}"
+  register devshow_output
+
+- name: debug output of the file
+  debug:
+    msg: "{{ devshow_output }}"
+  tags: debug
+
+- name: debugging to check /etc/resolv.conf
+  command: /usr/bin/cat /etc/resolv.conf
+  register etcresolv_output
+  tags: debug
+
+- name: debug output of the file
+  debug:
+    msg: "{{ etcresolv_output }}"
+  tags: debug
 
