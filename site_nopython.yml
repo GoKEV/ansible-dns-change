@@ -16,13 +16,15 @@
   - name: "RHEL5 write to file {{ resolv_file }}"
     raw: |
       echo "{{ resolv_text }}" > "{{ resolv_file }}"
+    tags: makeitso
 
   - name: RHEL5 read the file
     raw: /bin/cat "{{ resolv_file }}"
     register: cmd_output
+    tags: debug
 
   - name: debug output of the file
     debug:
       msg: "{{ cmd_output }}"
     delegate_to: localhost
-
+    tags: debug
