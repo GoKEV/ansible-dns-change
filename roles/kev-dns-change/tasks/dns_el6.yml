@@ -3,3 +3,14 @@
     src: resolv.conf.j2
     dest: /etc/resolv.conf
     mode: 0644
+
+- name: debugging to check /etc/resolv.conf
+  command: /usr/bin/cat /etc/resolv.conf
+  register: etcresolv_output
+  tags: debug
+
+- name: debug output of the file
+  debug:
+    msg: "{{ etcresolv_output }}"
+  tags: debug
+
