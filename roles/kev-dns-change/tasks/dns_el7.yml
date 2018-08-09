@@ -13,7 +13,5 @@
     state: present	
 
 - name: restart NetworkManager with command
-  command: /bin/systemctl restart NetworkManager.service
+  command: /usr/bin/nmcli connection up "{{ ansible_default_ipv4.interface }}"
 
-- name: restart NetworkManager with raw
-  raw: /bin/systemctl restart NetworkManager.service
