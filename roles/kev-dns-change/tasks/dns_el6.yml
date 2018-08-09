@@ -3,9 +3,10 @@
     src: resolv.conf.j2
     dest: /etc/resolv.conf
     mode: 0644
+  tags: makeitso
 
 - name: debugging to check /etc/resolv.conf
-  command: /usr/bin/cat /etc/resolv.conf
+  command: cat /etc/resolv.conf
   register: etcresolv_output
   tags: debug
 

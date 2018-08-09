@@ -6,4 +6,15 @@
     value: "{{ resolv_nameservers[0]|default ('') }} {{ resolv_nameservers[2]|default ('') }} {{ resolv_nameservers[3]|default ('') }}"	
     backup: yes
     state: present
+  tags: makeitso
+
+- name: debugging to check /etc/resolv.conf
+  command: cat /etc/network/interfaces
+  register: interface_output
+  tags: debug
+
+- name: debug output of the file
+  debug:
+    msg: "{{ interface_output }}"
+  tags: debug
 
