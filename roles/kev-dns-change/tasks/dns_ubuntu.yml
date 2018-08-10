@@ -16,6 +16,6 @@
 
 - name: Ubuntu-ONLY debug output of the file
   debug:
-    msg: "{{ interface_output }}"
+    msg: "{{ interface_output.stdout_lines }}"
   tags: debug
 

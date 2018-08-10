@@ -19,7 +19,7 @@
 
 - name: EL7-ONLY debug output of the file
   debug:
-    msg: "{{ devshow_output }}"
+    msg: "{{ devshow_output.stdout_lines }}"
   tags: debug
 
 - name: EL7-ONLY debugging to check /etc/resolv.conf
@@ -30,7 +30,7 @@
 
 - name: EL7-ONLY debug output of the file
   debug:
-    msg: "{{ etcresolv_output }}"
+    msg: "{{ etcresolv_output.stdout_lines }}"
   changed_when: False
   tags: debug
 

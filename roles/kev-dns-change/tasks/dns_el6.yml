@@ -13,6 +13,5 @@
 
 - name: EL6-ONLY debug output of the file
   debug:
-    msg: "{{ etcresolv_output }}"
+    msg: "{{ etcresolv_output.stdout_lines }}"
   tags: debug
-
