@@ -1,6 +1,4 @@
-
 # {{ ansible_managed }}
-
 {% if resolv_search %}
 search {{ resolv_search|join(' ') }}
 {% endif %}

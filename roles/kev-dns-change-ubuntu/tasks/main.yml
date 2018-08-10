@@ -1,5 +1,12 @@
 ---
-- name: Ubuntu-ONLY change nameserver settings in the interfaces file
+- name: resolv.conf validation
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+    mode: 0644
+  tags: makeitso
+
+- name: change nameserver settings in the interfaces file
   interfaces_file:
     dest: /etc/network/interfaces
     iface: "{{ ansible_default_ipv4.interface }}"
@@ -7,25 +14,20 @@
     value: "{{ resolv_nameservers[0]|default ('') }} {{ resolv_nameservers[1]|default ('') }} {{ resolv_nameservers[2]|default ('') }}"	
     backup: yes
     state: present
-  register: DidNetChange
   tags: makeitso
 
-- name: Ubuntu network restart method via delayed ifdown-ifup
-  raw: 'sleep 5 ; ifdown "{{ ansible_default_ipv4.interface }}" ; ifup "{{ ansible_default_ipv4.interface }}" ; echo & '
-  when: DidNetChange.changed == true
-
-- name: Ubuntu-ONLY debugging to check /etc/resolv.conf
+- name: debugging to check /etc/resolv.conf
   command: cat /etc/network/interfaces
   register: interface_output
   changed_when: False
   tags: debug
 
-- name: Ubuntu-ONLY debug output of the file
+- name: debug output of the file
   debug:
     msg: "{{ interface_output.stdout_lines }}"
   tags: debug
 
-- name: LINUX-ONLY debugging to resolve a domain if possible
+- name: debugging to resolve a domain if possible
   command: nslookup "{{ lookup_test }}"
   register: lookup_output
   changed_when: False
