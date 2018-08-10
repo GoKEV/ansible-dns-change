@@ -1,3 +1,4 @@
+---
 - name: Ubuntu-ONLY change nameserver settings in the interfaces file
   interfaces_file:
     dest: /etc/network/interfaces
@@ -6,11 +7,12 @@
     value: "{{ resolv_nameservers[0]|default ('') }} {{ resolv_nameservers[1]|default ('') }} {{ resolv_nameservers[2]|default ('') }}"	
     backup: yes
     state: present
-  notify: RestartNetwork
+  register: DidNetChange
   tags: makeitso
 
 - name: Ubuntu network restart method via delayed ifdown-ifup
   raw: 'sleep 5 ; ifdown "{{ ansible_default_ipv4.interface }}" ; ifup "{{ ansible_default_ipv4.interface }}" ; echo & '
+  when: DidNetChange
 
 - name: Ubuntu-ONLY debugging to check /etc/resolv.conf
   command: cat /etc/network/interfaces
