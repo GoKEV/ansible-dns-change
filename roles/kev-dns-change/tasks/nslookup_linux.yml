@@ -6,6 +6,6 @@
 
 - name: LINUX-ONLY debug output of the resolution
   debug:
-    msg: "{{ lookup_output.stdout_lines }}"
+    msg: "{{ lookup_output }}"
   tags: debug
 
