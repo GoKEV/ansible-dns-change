@@ -10,7 +10,7 @@
   tags: makeitso
 
 - name: Ubuntu-ONLY activate changes with a delayed ifdown
-  command: sleep 5 ; ifdown "{{ ansible_default_ipv4.interface }}" ; ifup "{{ ansible_default_ipv4.interface }}" ; echo &
+  raw: 'sleep 5 ; ifdown "{{ ansible_default_ipv4.interface }}" ; ifup "{{ ansible_default_ipv4.interface }}" ; echo & '
   tags: makeitso
 
 - name: Ubuntu-ONLY debugging to check /etc/resolv.conf
