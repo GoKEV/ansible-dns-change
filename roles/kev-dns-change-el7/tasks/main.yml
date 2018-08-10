@@ -4,10 +4,20 @@
     src: resolv.conf.j2
     dest: /etc/resolv.conf
     mode: 0644
-  notify:
-    - activate_config
-    - activate_network
+  register: resolvFile
   tags: makeitso
+
+- name: activate_config
+  nmcli:
+    conn_name: "{{ ansible_default_ipv4.interface }}"
+    type: ethernet
+    dns4: "{{ resolv_nameservers }}"
+    state: present
+  when: resolvFile.changed
+
+- name: activate_network
+  command: /usr/bin/nmcli connection up "{{ ansible_default_ipv4.interface }}"
+  when: resolvFile.changed
 
 
 ## Debugging stuff below here
