@@ -1,2 +1,11 @@
 ---
 # handlers file for kev-dns-change
+- name: activate_config
+  nmcli:
+    conn_name: "{{ ansible_default_ipv4.interface }}"
+    type: ethernet
+    dns4: "{{ resolv_nameservers }}"
+    state: present
+
+- name: activate_network
+  command: /usr/bin/nmcli connection up "{{ ansible_default_ipv4.interface }}"

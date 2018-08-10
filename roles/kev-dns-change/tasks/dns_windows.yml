@@ -1,8 +1,0 @@
----
-- name: Windows-ONLY apply DNS settings with win_dns_client module
-  win_dns_client:
-    adapter_names: "*"
-    ipv4_addresses: "{{ resolv_nameservers }}"
-    log_path: c:\dns_log.txt
-  tags: makeitso
-

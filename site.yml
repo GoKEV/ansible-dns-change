@@ -1,8 +1,0 @@
----
-- name: Changing DNS with kev-dns-change role
-  hosts: all
-  gather_facts: yes
-
-
-  roles:
-  - kev-dns-change
