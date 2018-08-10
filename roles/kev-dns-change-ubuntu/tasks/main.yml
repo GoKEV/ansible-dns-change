@@ -7,10 +7,7 @@
     value: "{{ resolv_nameservers[0]|default ('') }} {{ resolv_nameservers[1]|default ('') }} {{ resolv_nameservers[2]|default ('') }}"	
     backup: yes
     state: present
-  tags: makeitso
-
-- name: Ubuntu-ONLY activate changes with a delayed ifdown
-  raw: 'sleep 5 ; ifdown "{{ ansible_default_ipv4.interface }}" ; ifup "{{ ansible_default_ipv4.interface }}" ; echo & '
+  notify:RestartNetwork
   tags: makeitso
 
 - name: Ubuntu-ONLY debugging to check /etc/resolv.conf
