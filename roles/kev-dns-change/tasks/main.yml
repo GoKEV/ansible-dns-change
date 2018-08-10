@@ -1,17 +1,17 @@
 ---
-- name: Update DNS for Windows boxes
+- name: Windows-ONLY include dns_windows.yml
   include: dns_windows.yml
   when: ansible_os_family is defined and ansible_os_family == "Windows" 
 
-- name: Update DNS for Ubuntu boxes
+- name: Ubuntu-ONLY include dns_ubuntu.yml
   include: dns_ubuntu.yml
   when: ansible_distribution is defined and ansible_distribution == "Ubuntu"
 
-- name: Update DNS for RHEL 6 boxes
+- name: EL6-ONLY include dns_el6.yml
   include: dns_el6.yml
   when: ansible_distribution_file_variety is defined and ansible_distribution_file_variety == 'RedHat' and ansible_distribution_major_version == '6'
 
-- name: Update DNS for RHEL 7 boxes
+- name: EL7-ONLY include dns_el7.yml
   include: dns_el7.yml
   when: ansible_distribution_file_variety is defined and ansible_distribution_file_variety == 'RedHat' and ansible_distribution_major_version == '7'
 

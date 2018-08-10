@@ -1,5 +1,5 @@
 ---
-- name: Apply DNS settings for Windows machines with win_dns_client
+- name: Windows-ONLY apply DNS settings with win_dns_client module
   win_dns_client:
     adapter_names: "*"
     ipv4_addresses: "{{ resolv_nameservers }}"

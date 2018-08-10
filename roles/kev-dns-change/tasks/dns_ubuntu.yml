@@ -1,4 +1,4 @@
-- name: Change nameserver settings in the interfaces file
+- name: Ubuntu-ONLY change nameserver settings in the interfaces file
   interfaces_file:
     dest: /etc/network/interfaces
     iface: "{{ ansible_default_ipv4.interface }}"
@@ -8,12 +8,12 @@
     state: present
   tags: makeitso
 
-- name: debugging to check /etc/resolv.conf
+- name: Ubuntu-ONLY debugging to check /etc/resolv.conf
   command: cat /etc/network/interfaces
   register: interface_output
   tags: debug
 
-- name: debug output of the file
+- name: Ubuntu-ONLY debug output of the file
   debug:
     msg: "{{ interface_output }}"
   tags: debug

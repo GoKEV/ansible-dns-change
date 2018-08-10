@@ -1,16 +1,16 @@
-- name: Configure resolv.conf on EL6
+- name: EL6-ONLY Configure resolv.conf on EL6
   template:
     src: resolv.conf.j2
     dest: /etc/resolv.conf
     mode: 0644
   tags: makeitso
 
-- name: debugging to check /etc/resolv.conf
+- name: EL6-ONLY debugging to check /etc/resolv.conf
   command: cat /etc/resolv.conf
   register: etcresolv_output
   tags: debug
 
-- name: debug output of the file
+- name: EL6-ONLY debug output of the file
   debug:
     msg: "{{ etcresolv_output }}"
   tags: debug
