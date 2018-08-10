@@ -1,5 +1,5 @@
 ---
-- name: EL7-ONLY Configure resolv.conf on EL7
+- name: Check running config via resolv.conf
   template:
     src: resolv.conf.j2
     dest: /etc/resolv.conf
@@ -7,7 +7,7 @@
   register: resolvFile
   tags: makeitso
 
-- name: activate_config
+- name: Apply new network config if necessary
   nmcli:
     conn_name: "{{ ansible_default_ipv4.interface }}"
     type: ethernet
@@ -15,7 +15,7 @@
     state: present
   when: resolvFile.changed
 
-- name: activate_network
+- name: Activate new network config if necessary
   command: /usr/bin/nmcli connection up "{{ ansible_default_ipv4.interface }}"
   when: resolvFile.changed
 
@@ -23,36 +23,36 @@
 ## Debugging stuff below here
 
 
-- name: EL7-ONLY debugging to check interface status
+- name: Check interface current status
   command: /usr/bin/nmcli dev show "{{ ansible_default_ipv4.interface }}"
   register: devshow_output
   changed_when: False
   tags: debug
 
-- name: EL7-ONLY debug output of the file
+- name: Debug output of interface current status
   debug:
     msg: "{{ devshow_output.stdout_lines }}"
   tags: debug
 
-- name: EL7-ONLY debugging to check /etc/resolv.conf
+- name: Check /etc/resolv.conf
   command: "cat /etc/resolv.conf"
   register: etcresolv_output
   changed_when: False
   tags: debug
 
-- name: EL7-ONLY debug output of the file
+- name: Debug output of /etc/resolv.conf
   debug:
     msg: "{{ etcresolv_output.stdout_lines }}"
   changed_when: False
   tags: debug
 
-- name: LINUX-ONLY debugging to resolve a domain if possible
+- name: Check if we can resolve DNS for "{{ lookup_test }}"
   command: nslookup "{{ lookup_test }}"
   register: lookup_output
   changed_when: False
   tags: debug
 
-- name: LINUX-ONLY debug output of the resolution
+- name: Debug output of DNS lookup for "{{ lookup_test }}"
   debug:
     msg: "{{ lookup_output }}"
   tags: debug
