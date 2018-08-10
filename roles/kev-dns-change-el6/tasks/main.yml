@@ -1,6 +1,29 @@
 ---
-- name: EL6-ONLY include dns_el6.yml
-  include: dns_el6.yml
+- name: EL6-ONLY Configure resolv.conf on EL6
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+    mode: 0644
+  tags: makeitso
 
-- name: LINUX-ONLY include nslookup.yml
-  include: nslookup_linux.yml
+- name: EL6-ONLY debugging to check /etc/resolv.conf
+  command: cat /etc/resolv.conf
+  register: etcresolv_output
+  changed_when: False
+  tags: debug
+
+- name: EL6-ONLY debug output of the file
+  debug:
+    msg: "{{ etcresolv_output.stdout_lines }}"
+  tags: debug
+
+- name: LINUX-ONLY debugging to resolve a domain if possible
+  command: nslookup "{{ lookup_test }}"
+  register: lookup_output
+  changed_when: False
+  tags: debug
+
+- name: LINUX-ONLY debug output of the resolution
+  debug:
+    msg: "{{ lookup_output }}"
+  tags: debug

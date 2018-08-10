@@ -8,7 +8,7 @@
     state: present
   tags: makeitso
 
-- name: EL7-ONLY activate changes with nmcli
+- name: Ubuntu-ONLY activate changes with a delayed ifdown
   command: sleep 5 ; ifdown "{{ ansible_default_ipv4.interface }}" ; ifup "{{ ansible_default_ipv4.interface }}" ; echo &
   tags: makeitso
 

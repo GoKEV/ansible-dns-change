@@ -1,6 +1,37 @@
 ---
-- name: Ubuntu-ONLY include dns_ubuntu.yml
-  include: dns_ubuntu.yml
+- name: Ubuntu-ONLY change nameserver settings in the interfaces file
+  interfaces_file:
+    dest: /etc/network/interfaces
+    iface: "{{ ansible_default_ipv4.interface }}"
+    option: dns-nameservers
+    value: "{{ resolv_nameservers[0]|default ('') }} {{ resolv_nameservers[1]|default ('') }} {{ resolv_nameservers[2]|default ('') }}"	
+    backup: yes
+    state: present
+  tags: makeitso
 
-- name: LINUX-ONLY include nslookup.yml
-  include: nslookup_linux.yml
+- name: Ubuntu-ONLY activate changes with a delayed ifdown
+  command: sleep 5 ; ifdown "{{ ansible_default_ipv4.interface }}" ; ifup "{{ ansible_default_ipv4.interface }}" ; echo &
+  tags: makeitso
+
+- name: Ubuntu-ONLY debugging to check /etc/resolv.conf
+  command: cat /etc/network/interfaces
+  register: interface_output
+  changed_when: False
+  tags: debug
+
+- name: Ubuntu-ONLY debug output of the file
+  debug:
+    msg: "{{ interface_output.stdout_lines }}"
+  tags: debug
+
+- name: LINUX-ONLY debugging to resolve a domain if possible
+  command: nslookup "{{ lookup_test }}"
+  register: lookup_output
+  changed_when: False
+  tags: debug
+
+- name: LINUX-ONLY debug output of the resolution
+  debug:
+    msg: "{{ lookup_output }}"
+  tags: debug
+

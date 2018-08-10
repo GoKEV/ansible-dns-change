@@ -1,7 +1,19 @@
 ---
-- name: Windows-ONLY include dns_windows.yml
-  include: dns_windows.yml
+- name: Windows-ONLY apply DNS settings with win_dns_client module
+  win_dns_client:
+    adapter_names: "*"
+    ipv4_addresses: "{{ resolv_nameservers }}"
+    log_path: c:\dns_log.txt
+  tags: makeitso
 
-- name: Windows-ONLY include nslookup.yml
-  include: nslookup_windows.yml
+- name: Windows-ONLY debugging to resolve a domain if possible
+  win_command: nslookup "{{ lookup_test }}"
+  register: lookup_output
+  changed_when: False
+  tags: debug
+
+- name: Windows-ONLY debug output of the resolution
+  debug:
+    msg: "{{ lookup_output }}"
+  tags: debug
 
