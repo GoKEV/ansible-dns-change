@@ -35,8 +35,3 @@
   debug:
     msg: "{{ lookup_output }}"
   tags: debug
-
-- name: Ubuntu-ONLY debug output of DidNetChange
-  debug:
-    msg: "{{ DidNetChange }}"
-  tags: debug

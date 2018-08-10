@@ -24,9 +24,3 @@
   debug:
     msg: "{{ interface_output.stdout_lines }}"
   tags: debug
-
-- name: Ubuntu-ONLY debug output of DidNetChange
-  debug:
-    msg: "{{ DidNetChange }}"
-  tags: debug
-

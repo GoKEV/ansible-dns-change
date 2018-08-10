@@ -5,10 +5,12 @@
     type: ethernet	
     dns4: "{{ resolv_nameservers }}"	
     state: present	
+  register: DidNetChange
   tags: makeitso
 
 - name: EL7-ONLY activate changes with nmcli
   command: /usr/bin/nmcli connection up "{{ ansible_default_ipv4.interface }}"
+  when: DidNetChange.changed == true
   tags: makeitso
 
 - name: EL7-ONLY debugging to check interface status
