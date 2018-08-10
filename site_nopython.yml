@@ -5,6 +5,7 @@
   gather_facts: no
 
   vars:
+  - lookup_test: redhat.com
   - resolv_file: /etc/resolv.conf
   - resolv_text: |
       # This file is managed by Ansible.  Changes will be lost.
@@ -26,7 +27,20 @@
 
   - name: debug output of the file
     debug:
-      msg: "{{ cmd_output }}"
+      msg: "{{ cmd_output.stdout_lines }}"
+    delegate_to: localhost
+    changed_when: False
+    tags: debug
+
+  - name: RHEL5 perform an nslookup
+    raw: nslookup "{{ lookup_test }}"
+    register: lookup_output
+    changed_when: False
+    tags: debug
+
+  - name: debug output of the file
+    debug:
+      msg: "{{ lookup_output.stdout_lines }}"
     delegate_to: localhost
     changed_when: False
     tags: debug
