@@ -1,0 +1,6 @@
+---
+- name: EL6-ONLY include dns_el6.yml
+  include: dns_el6.yml
+
+- name: LINUX-ONLY include nslookup.yml
+  include: nslookup_linux.yml

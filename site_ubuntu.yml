@@ -1,0 +1,8 @@
+---
+- name: Changing DNS with kev-dns-change-ubuntu role
+  hosts: all
+  gather_facts: yes
+
+
+  roles:
+  - kev-dns-change-ubuntu

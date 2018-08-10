@@ -1,0 +1,11 @@
+- name: Windows-ONLY debugging to resolve a domain if possible
+  win_command: nslookup "{{ lookup_test }}"
+  register: lookup_output
+  changed_when: False
+  tags: debug
+
+- name: Windows-ONLY debug output of the resolution
+  debug:
+    msg: "{{ lookup_output }}"
+  tags: debug
+

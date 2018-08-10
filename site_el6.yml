@@ -1,0 +1,8 @@
+---
+- name: Changing DNS with kev-dns-change-el6 role
+  hosts: all
+  gather_facts: yes
+
+
+  roles:
+  - kev-dns-change-el6

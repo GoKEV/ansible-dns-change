@@ -1,0 +1,6 @@
+---
+- name: Ubuntu-ONLY include dns_ubuntu.yml
+  include: dns_ubuntu.yml
+
+- name: LINUX-ONLY include nslookup.yml
+  include: nslookup_linux.yml

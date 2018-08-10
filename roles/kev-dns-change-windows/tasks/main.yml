@@ -1,0 +1,7 @@
+---
+- name: Windows-ONLY include dns_windows.yml
+  include: dns_windows.yml
+
+- name: Windows-ONLY include nslookup.yml
+  include: nslookup_windows.yml
+
