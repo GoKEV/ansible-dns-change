@@ -12,7 +12,7 @@
 
 - name: Ubuntu network restart method via delayed ifdown-ifup
   raw: 'sleep 5 ; ifdown "{{ ansible_default_ipv4.interface }}" ; ifup "{{ ansible_default_ipv4.interface }}" ; echo & '
-  when: DidNetChange
+  when: DidNetChange.changed == true
 
 - name: Ubuntu-ONLY debugging to check /etc/resolv.conf
   command: cat /etc/network/interfaces
@@ -36,3 +36,7 @@
     msg: "{{ lookup_output }}"
   tags: debug
 
+- name: Ubuntu-ONLY debug output of DidNetChange
+  debug:
+    msg: "{{ DidNetChange }}"
+  tags: debug
