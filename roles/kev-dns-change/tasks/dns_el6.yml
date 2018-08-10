@@ -8,6 +8,7 @@
 - name: EL6-ONLY debugging to check /etc/resolv.conf
   command: cat /etc/resolv.conf
   register: etcresolv_output
+  changed_when: False
   tags: debug
 
 - name: EL6-ONLY debug output of the file

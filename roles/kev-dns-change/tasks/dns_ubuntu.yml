@@ -11,6 +11,7 @@
 - name: Ubuntu-ONLY debugging to check /etc/resolv.conf
   command: cat /etc/network/interfaces
   register: interface_output
+  changed_when: False
   tags: debug
 
 - name: Ubuntu-ONLY debug output of the file
