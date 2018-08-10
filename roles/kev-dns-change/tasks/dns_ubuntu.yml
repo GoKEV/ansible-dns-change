@@ -6,7 +6,7 @@
     value: "{{ resolv_nameservers[0]|default ('') }} {{ resolv_nameservers[1]|default ('') }} {{ resolv_nameservers[2]|default ('') }}"	
     backup: yes
     state: present
-  notify:RestartNetwork
+  notify: RestartNetwork
   tags: makeitso
 
 - name: Ubuntu-ONLY debugging to check /etc/resolv.conf
