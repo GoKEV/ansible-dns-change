@@ -1,6 +1,3 @@
 ---
 # handlers file for kev-dns-change
 
-- name: RestartNetwork
-  raw: 'sleep 5 ; ifdown "{{ ansible_default_ipv4.interface }}" ; ifup "{{ ansible_default_ipv4.interface }}" ; echo & '
-
